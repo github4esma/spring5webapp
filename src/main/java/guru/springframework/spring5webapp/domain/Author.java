@@ -5,6 +5,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.ManyToMany;
 import javax.persistence.Id;
 import javax.persistence.GenerationType;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -18,15 +19,14 @@ public class Author {
     private String lastName;
 
     @ManyToMany(mappedBy = "authors")
-    private Set<Book> books;
+    private Set<Book> books = new HashSet<>();
 
     public Author() {
     }
 
-    public Author(String firstname, String lastname, Set<Book> books) {
+    public Author(String firstname, String lastname) {
         this.firstName = firstname;
         this.lastName = lastname;
-        this.books = books;
     }
 
     public Long getId() {
@@ -61,6 +61,14 @@ public class Author {
         this.books = books;
     }
 
+    @Override
+    public String toString() {
+        return "Author{" +
+                "id=" + id +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                '}';
+    }
 
     @Override
     public boolean equals(Object o) {
